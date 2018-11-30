@@ -62,7 +62,7 @@ namespace SpecFlow.Steps
         [When(@"I see Flight Records displayed are valid as followings")]
         public void WhenISeeFlightRecordsDisplayedAreValidAsFollowings(Table table)
         {
-            Console.WriteLine();
+            dynamic data = table.CreateDynamicInstance();
         }
 
         [Then(@"Displayed Flight Records are valid for '(.*)'")]

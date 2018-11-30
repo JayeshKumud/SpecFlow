@@ -56,17 +56,17 @@ namespace SpecFlow.PageObjects
             //elementToBeClickable(By.XPath("//span[contains(text(),'" + value + "')]")).Click();
         }
 
-        public IWebElement UITag() { return elementToBeClickable(uiTag); }
+        public IWebElement UITag() => elementToBeClickable(uiTag); 
 
-        public IWebElement ToText() { return elementToBeClickable(toText); }
+        public IWebElement ToText() => elementToBeClickable(toText); 
 
-        public void SelectRoundTrip() { elementToBeClickable(roundTrip).Click(); }
+        public void SelectRoundTrip() => elementToBeClickable(roundTrip).Click(); 
 
-        public void SelectOneWayTrip() { elementToBeClickable(oneWayTrip).Click(); }
+        public void SelectOneWayTrip() => elementToBeClickable(oneWayTrip).Click(); 
 
-        public void SelectMultiCityTrip() { elementToBeClickable(multiCityTrip).Click(); }
+        public void SelectMultiCityTrip() => elementToBeClickable(multiCityTrip).Click(); 
 
-        public void ClickSearchButton() { elementToBeClickable(searchButton).Click(); }
+        public void ClickSearchButton() => elementToBeClickable(searchButton).Click(); 
 
         public void SelectFromDate(int dateOffSet)
         {
