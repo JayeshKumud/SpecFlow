@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -10,17 +11,16 @@ using System.Threading.Tasks;
 
 namespace SpecFlow.Library
 {
-    public abstract class PageObject : WebDriverHelper
+    public abstract class PageObject 
     {
         private static TimeSpan DRIVER_WAIT_TIME = TimeSpan.FromSeconds(10);
-
         protected WebDriverWait wait;
-        protected IWebDriver webDriver;
+        private RemoteWebDriver driver;
 
-        protected PageObject()
+        protected PageObject(RemoteWebDriver driver)
         {
-            this.webDriver = getWebDriver();
-            this.wait = new WebDriverWait(webDriver, DRIVER_WAIT_TIME);
+            this.driver = driver;
+            this.wait = new WebDriverWait(driver, DRIVER_WAIT_TIME);
         }
 
     
@@ -29,7 +29,7 @@ namespace SpecFlow.Library
          */
         public String getCurrentPageTitle()
         {
-            return getWebDriver().Title;
+            return driver.Title;
         }
 
         /**
@@ -41,7 +41,7 @@ namespace SpecFlow.Library
         public bool checkPageTitle(String title)
         {
             //return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(ExpectedConditions.TitleIs(title));
-            return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(d => d.Title.Equals(title));
+            return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(d => d.Title.Equals(title));
         }
 
         /**
@@ -54,7 +54,7 @@ namespace SpecFlow.Library
         public bool checkPageTitleContains(String title)
         {
             //return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(ExpectedConditions.TitleContains(title));
-            return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(d => d.Title.Contains(title));
+            return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(d => d.Title.Contains(title));
         }
 
         /**
@@ -66,7 +66,7 @@ namespace SpecFlow.Library
         public bool checkPageUrlToBe(String url)
         {
             //return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(ExpectedConditions.UrlToBe(url));
-            return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(d => d.Url.Equals(url));
+            return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(d => d.Url.Equals(url));
         }
 
         /**
@@ -78,7 +78,7 @@ namespace SpecFlow.Library
         public bool checkPageUrlContains(String fraction)
         {
             //return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(ExpectedConditions.UrlContains(fraction));
-            return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(d => d.Url.Contains(fraction));
+            return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(d => d.Url.Contains(fraction));
         }
 
         /**
@@ -89,7 +89,7 @@ namespace SpecFlow.Library
         protected IWebElement waitForExpectedElement(By by)
         {
             //return wait.Until(ExpectedConditions.ElementExists(by));
-            return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(d => d.FindElement(by));
+            return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(d => d.FindElement(by));
         }
 
         /**
@@ -104,7 +104,7 @@ namespace SpecFlow.Library
             try
             {
                 //return new WebDriverWait(getWebDriver(), TimeSpan.FromSeconds(waitTimeInSeconds)).Until(d => d.FindElement(by));
-                return new WebDriverWait(getWebDriver(), TimeSpan.FromSeconds(waitTimeInSeconds)).Until(visibilityOfElementLocated(by));
+                return new WebDriverWait(driver, TimeSpan.FromSeconds(waitTimeInSeconds)).Until(visibilityOfElementLocated(by));
             }
             catch (NoSuchElementException e)
             {
@@ -120,7 +120,7 @@ namespace SpecFlow.Library
         {
             return driver =>
             {
-                IWebElement element = getWebDriver().FindElement(by);
+                IWebElement element = driver.FindElement(by);
                 return element.Displayed ? element : null;
             };
         }
@@ -134,8 +134,8 @@ namespace SpecFlow.Library
          */
         public bool textToBePresentInElement(IWebElement element, String text)
         {
-            //return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(ExpectedConditions.TextToBePresentInElement(element, text));
-            return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElement(element, text));
+            //return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(ExpectedConditions.TextToBePresentInElement(element, text));
+            return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElement(element, text));
         }
 
 
@@ -149,7 +149,7 @@ namespace SpecFlow.Library
          */
         public bool textToBePresentInElementLocated(By by, String text)
         {
-            return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementLocated(by, text));
+            return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementLocated(by, text));
         }
 
 
@@ -163,7 +163,7 @@ namespace SpecFlow.Library
          */
         public bool textToBePresentInElementValue(IWebElement element, String text)
         {
-            return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementValue(element, text));
+            return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementValue(element, text));
         }
 
 
@@ -178,7 +178,7 @@ namespace SpecFlow.Library
          */
         public bool textToBePresentInElementValue(By by, String text)
         {
-            return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementValue(by, text));
+            return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementValue(by, text));
         }
 
 
@@ -191,7 +191,7 @@ namespace SpecFlow.Library
          */
         public IWebDriver frameToBeAvailableAndSwitchToIt(String frameLocator)
         {
-            return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.FrameToBeAvailableAndSwitchToIt(frameLocator));
+            return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.FrameToBeAvailableAndSwitchToIt(frameLocator));
         }
 
 
@@ -204,7 +204,7 @@ namespace SpecFlow.Library
          */
         public IWebDriver frameToBeAvailableAndSwitchToIt(By by)
         {
-            return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.FrameToBeAvailableAndSwitchToIt(by));
+            return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.FrameToBeAvailableAndSwitchToIt(by));
         }
 
 
@@ -216,7 +216,7 @@ namespace SpecFlow.Library
          */
         public bool invisibilityOfElementLocated(By by)
         {
-            return (new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(by));
+            return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(by));
         }
 
         /**
@@ -228,7 +228,7 @@ namespace SpecFlow.Library
          */
         public bool invisibilityOfElementWithText(By by, String text)
         {
-            return (new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementWithText(by, text));
+            return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementWithText(by, text));
         }
 
 
@@ -241,7 +241,7 @@ namespace SpecFlow.Library
          */
         public IWebElement elementToBeClickable(By by)
         {
-            return (new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
+            return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
         }
 
 
@@ -255,7 +255,7 @@ namespace SpecFlow.Library
 
         public IWebElement elementToBeClickable(IWebElement element)
         {
-            return (new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
+            return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
         }
 
 
@@ -268,7 +268,7 @@ namespace SpecFlow.Library
          */
         public bool stalenessOf(IWebElement element)
         {
-            return (new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.StalenessOf(element));
+            return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.StalenessOf(element));
         }
 
         /**
@@ -276,7 +276,7 @@ namespace SpecFlow.Library
          */
         public bool elementToBeSelected(By by)
         {
-            return (new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeSelected(by));
+            return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeSelected(by));
         }
 
         /**
@@ -284,7 +284,7 @@ namespace SpecFlow.Library
          */
         public bool elementToBeSelected(IWebElement element)
         {
-            return (new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeSelected(element));
+            return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeSelected(element));
         }
 
         /**
@@ -292,7 +292,7 @@ namespace SpecFlow.Library
          */
         public bool elementSelectionStateToBe(IWebElement element, bool selected)
         {
-            return (new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementSelectionStateToBe(element, selected));
+            return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementSelectionStateToBe(element, selected));
         }
 
         /**
@@ -300,12 +300,12 @@ namespace SpecFlow.Library
          */
         public bool elementSelectionStateToBe(By by, bool selected)
         {
-            return (new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementSelectionStateToBe(by, selected));
+            return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementSelectionStateToBe(by, selected));
         }
 
         public void waitForAlert()
         {
-            (new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
+            (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
         }
 
         /**
@@ -318,7 +318,7 @@ namespace SpecFlow.Library
          */
         public ReadOnlyCollection<IWebElement> visibilityOfAllElementsLocatedBy(By by)
         {
-            return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.VisibilityOfAllElementsLocatedBy(by));
+            return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.VisibilityOfAllElementsLocatedBy(by));
         }
 
 
@@ -332,7 +332,7 @@ namespace SpecFlow.Library
          */
         public ReadOnlyCollection<IWebElement> visibilityOfAllElements(ReadOnlyCollection<IWebElement> elements)
         {
-            return (new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.VisibilityOfAllElementsLocatedBy(elements));
+            return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.VisibilityOfAllElementsLocatedBy(elements));
         }
 
 
@@ -345,7 +345,7 @@ namespace SpecFlow.Library
          */
         public ReadOnlyCollection<IWebElement> presenceOfAllElementsLocatedBy(By by)
         {
-            return (new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(by));
+            return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(by));
         }
 
          /**
@@ -359,38 +359,23 @@ namespace SpecFlow.Library
         {
             try
             {
-                new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(by));
+                new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(by));
             }
-            catch (TimeoutException exception)
+            catch (TimeoutException e)
             {
                 return false;
             }
             return true;
         }
 
-
-        public IWebDriver getBrowserByPageTitle(String pageTitle)
-        {
-            foreach (String windowHandle in webDriver.WindowHandles)
-            {
-                webDriver = webDriver.SwitchTo().Window(windowHandle);
-                if (pageTitle.Equals(webDriver.Title, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    return webDriver;
-                }
-            }
-            return null;
-        }
-
-
         public void navigateToPreviousPageUsingBrowserBackButton()
         {
-            webDriver.Navigate().Back();
+            driver.Navigate().Back();
         }
 
         public void clickWithinElementWithXYCoordinates(IWebElement webElement, int x, int y)
         {
-            Actions builder = new Actions(webDriver);
+            Actions builder = new Actions(driver);
             builder.MoveToElement(webElement, x, y);
             builder.Click();
             builder.Perform();
@@ -398,17 +383,17 @@ namespace SpecFlow.Library
 
         public String getElementByTagNameWithJSExecutor(String tagName)
         {
-            return ((IJavaScriptExecutor)webDriver).ExecuteScript("return window.getComputedStyle(document.getElementsByTagName('" + tagName + "')").ToString();
+            return ((IJavaScriptExecutor)driver).ExecuteScript("return window.getComputedStyle(document.getElementsByTagName('" + tagName + "')").ToString();
         }
 
         public String getElementByQueryJSExecutor(String cssSelector)
         {
-            return ((IJavaScriptExecutor)webDriver).ExecuteScript("return window.getComputedStyle(document.querySelector('" + cssSelector + "')").ToString();
+            return ((IJavaScriptExecutor)driver).ExecuteScript("return window.getComputedStyle(document.querySelector('" + cssSelector + "')").ToString();
         }
 
         public void SelectJavaScriptElement(IWebElement element, String value)
         {
-            ((IJavaScriptExecutor)webDriver).ExecuteScript("arguments[0].style.height='auto'; arguments[0].style.visibility='visible';", element);
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].style.height='auto'; arguments[0].style.visibility='visible';", element);
             element.Click();
         }
 
@@ -419,7 +404,7 @@ namespace SpecFlow.Library
          **/
         protected IWebElement findElement(By by)
         {
-            return getWebDriver().FindElement(by);
+            return driver.FindElement(by);
         }
 
         /**

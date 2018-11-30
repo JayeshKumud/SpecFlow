@@ -68,13 +68,11 @@ namespace SpecFlow.Feature
         {
 #line 7
 #line 8
- testRunner.Given("I have Launch in \'Browser\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I am on the HomePage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.When("I Navigate to URL \'URL\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I click \'Flight\' option on HomePage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
- testRunner.And("I Click on \'Flight\' on Home Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
- testRunner.Then("I See the \'Flight\' search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I see Flight Search Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
         }
         
@@ -91,7 +89,7 @@ namespace SpecFlow.Feature
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("US1001_AC01_01 - Search One Way Flight", @__tags);
-#line 14
+#line 13
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
@@ -114,11 +112,11 @@ this.FeatureBackground();
                         "3",
                         "3",
                         "Economy"});
-#line 15
+#line 14
  testRunner.Given("I entered the followings data as Flight Search Criteria", ((string)(null)), table1, "Given ");
-#line 18
+#line 17
  testRunner.And(string.Format("I update the Flight Search Criteria as \'{0}\'", trip), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 19
+#line 18
  testRunner.When("I Click \'SearchButton\' button on Flight Search Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -139,9 +137,9 @@ this.FeatureBackground();
                         "3",
                         "3",
                         "Economy"});
-#line 20
+#line 19
  testRunner.And("I see Flight Records displayed are valid as followings", ((string)(null)), table2, "And ");
-#line 23
+#line 22
  testRunner.Then("Displayed Flight Records are valid for \'OneWay\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

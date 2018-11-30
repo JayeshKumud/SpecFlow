@@ -1,4 +1,5 @@
-﻿using SpecFlow.PageObjects;
+﻿using NUnit.Framework;
+using SpecFlow.PageObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,14 @@ namespace SpecFlow.Steps
             this.homePage = homePage;
         }
 
-        [When(@"I Click on '(.*)' on Home Page")]
-        public void WhenIClickOnOnHomePage(string option)
+        [Given(@"I am on the HomePage")]
+        public void GivenIAmOnTheHomePage()
+        {
+            Assert.AreEqual("Sign In", homePage.GetSignInTitleOption());
+        }
+
+        [When(@"I click '(.*)' option on HomePage")]
+        public void WhenIClickOptionOnHomePage(string option)
         {
             if (option.Contains("Flight")) { homePage.ClickFlightLink(); }
         }

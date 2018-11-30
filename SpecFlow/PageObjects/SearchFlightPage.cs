@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using SpecFlow.Library;
 using System;
@@ -11,6 +12,8 @@ namespace SpecFlow.PageObjects
 {
     public class SearchFlightPage : PageObject
     {
+        private RemoteWebDriver driver;
+        public SearchFlightPage(RemoteWebDriver driver) : base(driver) => this.driver = driver;
 
         private By fromText = By.CssSelector("#gosuggest_inputSrc.form-control");
         private By uiTag = By.CssSelector("#react-autosuggest-1");

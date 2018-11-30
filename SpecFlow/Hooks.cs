@@ -12,16 +12,27 @@ using OpenQA.Selenium.Remote;
 using System.IO;
 using AventStack.ExtentReports.Reporter.Configuration;
 using SpecFlow.Library;
+using OpenQA.Selenium.Firefox;
+using BoDi;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System.Configuration;
 
 namespace SpecFlow
 {
     [Binding]
     public class Hooks
     {
-        //Global Variable for Extend report
+        private readonly IObjectContainer objectContainer;
+        private RemoteWebDriver driver;
         private static ExtentTest featureName;
         private static ExtentTest scenario;
         private static ExtentReports extent;
+
+        public Hooks(IObjectContainer objectContainer)
+        {
+            this.objectContainer = objectContainer;
+        }
 
         [BeforeTestRun]
         public static void InitilizeReport()
@@ -44,16 +55,15 @@ namespace SpecFlow
         [BeforeFeature]
         public static void BeforeFeature()
         {
-            //Create dynamic feature name
-            //featureName = extent.CreateTest<AventStack.ExtentReports.Gherkin.Model.Feature>(FeatureContext.Current.FeatureInfo.Title);
             featureName = extent.CreateTest<AventStack.ExtentReports.Gherkin.Model.Feature>(FeatureContext.Current.FeatureInfo.Title);
         }
 
         [BeforeScenario]
         public void Initialize()
         {
-            //Create dynamic scenario name
-            //scenario = featureName.CreateNode<Scenario>(ScenarioContext.Current.ScenarioInfo.Title);
+            
+            SelectBrowser(BrowserType.Firefox);
+            NavigateToURL(new Uri(ConfigurationManager.AppSettings["URL"].ToString()));
             scenario = featureName.CreateNode<Scenario>(ScenarioContext.Current.ScenarioInfo.Title);
         }
 
@@ -105,7 +115,48 @@ namespace SpecFlow
         [AfterScenario]
         public void CleanUp()
         {
-
+            driver.Quit();
         }
+
+        internal void SelectBrowser(BrowserType browserType)
+        {
+            switch (browserType)
+            {
+                case BrowserType.Chrome:
+                    ChromeOptions option = new ChromeOptions();
+                    option.AddArgument("--headless");
+                    driver = new ChromeDriver(option);
+                    objectContainer.RegisterInstanceAs<IWebDriver>(driver);
+                    break;
+
+                case BrowserType.Firefox:
+                    var driverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    FirefoxDriverService service = FirefoxDriverService.CreateDefaultService(driverDir, "geckodriver.exe");
+                    //service.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+                    service.HideCommandPromptWindow = true;
+                    service.SuppressInitialDiagnosticInformation = true;
+                    driver = new FirefoxDriver(service);
+                    objectContainer.RegisterInstanceAs<RemoteWebDriver>(driver);
+                    break;
+
+                case BrowserType.IE:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        internal void NavigateToURL(Uri uri)
+        {
+            driver.Navigate().GoToUrl(uri);
+        }
+    }
+
+    enum BrowserType
+    {
+        Chrome,
+        Firefox,
+        IE
     }
 }

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using SpecFlow.Library;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,16 @@ namespace SpecFlow.PageObjects
 {
     public class HomePage : PageObject
     {
-        private By signInLink = By.CssSelector("#get_sign_in");
-        private By flightLink = By.XPath("//span[contains(@class,'iconText')][contains(text(),'Flights')]");
+        private RemoteWebDriver driver;
+        public HomePage(RemoteWebDriver driver) : base(driver) => this.driver = driver;
+       
+        private By signIn = By.CssSelector("#get_sign_in");
+        private By flight = By.XPath("//span[contains(@class,'iconText')][contains(text(),'Flights')]");
 
-        public String GetSignInTitleOption() { return waitForExpectedElement(signInLink).Text; }
+        public String GetSignInTitleOption() { return waitForExpectedElement(signIn).Text; }
 
-        public void ClickFlightLink() { elementToBeClickable(flightLink).Click(); }
+        public void ClickFlightLink() => elementToBeClickable(flight).Click();
+
+        public void ClickSignInLink() => elementToBeClickable(signIn).Click();
     }
 }

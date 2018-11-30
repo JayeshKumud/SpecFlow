@@ -5,10 +5,9 @@
 
 
 Background: User navigates to Search Page
-	Given I have Launch in 'Browser'
-	When I Navigate to URL 'URL'
-	And I Click on 'Flight' on Home Page
-	Then I See the 'Flight' search page
+	Given I am on the HomePage
+	When I click 'Flight' option on HomePage
+	Then I see Flight Search Page 
 
 @Smoke
 Scenario Outline: US1001_AC01_01 - Search One Way Flight

@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualBasic.Devices;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using SpecFlow.Classes;
 using SpecFlow.PageObjects;
 using System;
 using System.Threading;
@@ -20,28 +19,28 @@ namespace SpecFlow.Steps
             this.searchFlightPage = searchFlightPage;
         }
 
-        [Then(@"I See the '(.*)' search page")]
-        public void ThenISeeTheSearchPage(string page)
+        [Then(@"I see Flight Search Page")]
+        public void ThenISeeFlightSearchPage()
         {
-            if (page.Contains("Flight")) { Assert.IsTrue(searchFlightPage.checkPageTitleContains(page), "correct page : " + page + "displayed."); }
+            Assert.IsTrue(searchFlightPage.checkPageTitleContains("Flight"), "correct page displayed.");
         }
 
         [Given(@"I entered the followings data as Flight Search Criteria")]
         public void GivenIEnteredTheFollowingsDataAsFlightSearchCriteria(Table table)
         {
-            FlightSearch flightSearch = table.CreateInstance<FlightSearch>();
+            dynamic data = table.CreateDynamicInstance();
 
-            searchFlightPage.EnterFrom(flightSearch.From);
+            searchFlightPage.EnterFrom(data.From);
             Thread.Sleep(2 * 1000);
-            searchFlightPage.EnterTo(flightSearch.To);
+            searchFlightPage.EnterTo(data.To);
             Thread.Sleep(2 * 1000);
-            searchFlightPage.SelectFromDate(flightSearch.FromOffSet);
+            searchFlightPage.SelectFromDate(data.FromOffSet);
             Thread.Sleep(2 * 1000);
             //searchFlightPage.SelectToDate(flightSearch.ToOffSet);
 
-            searchFlightPage.SelectPassenger(flightSearch.Adult, flightSearch.Child, flightSearch.Infant);
+            searchFlightPage.SelectPassenger(data.Adult, data.Child, data.Infant);
             Thread.Sleep(2 * 1000);
-            searchFlightPage.SelectClass(flightSearch.Class);
+            searchFlightPage.SelectClass(data.Class);
             Thread.Sleep(2 * 1000);
         }
 
@@ -71,7 +70,5 @@ namespace SpecFlow.Steps
         {
             Console.WriteLine();
         }
-
     }
-
 }
