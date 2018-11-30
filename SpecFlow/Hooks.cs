@@ -119,12 +119,11 @@ namespace SpecFlow
 
         internal void SelectBrowser(BrowserType browserType)
         {
-            string driverDir = null;
             switch (browserType)
             {
                 case BrowserType.Chrome:
-                    driverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                    ChromeDriverService cservice = ChromeDriverService.CreateDefaultService(driverDir, "chromedriver.exe");
+                    var cdriverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    ChromeDriverService cservice = ChromeDriverService.CreateDefaultService(cdriverDir, "chromedriver.exe");
                     cservice.HideCommandPromptWindow = true;
                     cservice.SuppressInitialDiagnosticInformation = true;
                     //ChromeOptions option = new ChromeOptions();
@@ -134,8 +133,8 @@ namespace SpecFlow
                     break;
 
                 case BrowserType.Firefox:
-                    driverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                    FirefoxDriverService fservice = FirefoxDriverService.CreateDefaultService(driverDir, "geckodriver.exe");
+                    var fdriverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    FirefoxDriverService fservice = FirefoxDriverService.CreateDefaultService(fdriverDir, "geckodriver.exe");
                     //service.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
                     fservice.HideCommandPromptWindow = true;
                     fservice.SuppressInitialDiagnosticInformation = true;
