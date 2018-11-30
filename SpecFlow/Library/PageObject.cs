@@ -47,7 +47,7 @@ namespace SpecFlow.Library
         /**
          * An expectation for checking that the title contains a case-sensitive
          * substring
-         *
+         * Function updated with Lemda
          * @param title the fragment of title expected
          * @return true when the title matches, false otherwise
          */
