@@ -61,10 +61,9 @@ namespace SpecFlow
         [BeforeScenario]
         public void Initialize()
         {
-            
-            SelectBrowser(BrowserType.Firefox);
-            NavigateToURL(new Uri(ConfigurationManager.AppSettings["URL"].ToString()));
             scenario = featureName.CreateNode<Scenario>(ScenarioContext.Current.ScenarioInfo.Title);
+            SelectBrowser(BrowserType.Chrome);
+            NavigateToURL(new Uri(ConfigurationManager.AppSettings["URL"].ToString()));
         }
 
         [AfterStep]
@@ -120,22 +119,27 @@ namespace SpecFlow
 
         internal void SelectBrowser(BrowserType browserType)
         {
+            string driverDir = null;
             switch (browserType)
             {
                 case BrowserType.Chrome:
-                    ChromeOptions option = new ChromeOptions();
-                    option.AddArgument("--headless");
-                    driver = new ChromeDriver(option);
+                    driverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    ChromeDriverService cservice = ChromeDriverService.CreateDefaultService(driverDir, "chromedriver.exe");
+                    cservice.HideCommandPromptWindow = true;
+                    cservice.SuppressInitialDiagnosticInformation = true;
+                    //ChromeOptions option = new ChromeOptions();
+                    //option.AddArgument("--headless");
+                    driver = new ChromeDriver(cservice);
                     objectContainer.RegisterInstanceAs<IWebDriver>(driver);
                     break;
 
                 case BrowserType.Firefox:
-                    var driverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                    FirefoxDriverService service = FirefoxDriverService.CreateDefaultService(driverDir, "geckodriver.exe");
+                    driverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    FirefoxDriverService fservice = FirefoxDriverService.CreateDefaultService(driverDir, "geckodriver.exe");
                     //service.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
-                    service.HideCommandPromptWindow = true;
-                    service.SuppressInitialDiagnosticInformation = true;
-                    driver = new FirefoxDriver(service);
+                    fservice.HideCommandPromptWindow = true;
+                    fservice.SuppressInitialDiagnosticInformation = true;
+                    driver = new FirefoxDriver(fservice);
                     objectContainer.RegisterInstanceAs<RemoteWebDriver>(driver);
                     break;
 

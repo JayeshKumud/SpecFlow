@@ -164,13 +164,13 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="extent-config.xml" />
-    <Content Include="Resources\ChromeDriver\chromedriver.exe">
+    <Content Include="Resources\chromedriver.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\FirefoxDriver\geckodriver.exe">
+    <Content Include="Resources\geckodriver.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\IEDriver\IEDriverServer.exe">
+    <Content Include="Resources\IEDriverServer.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
