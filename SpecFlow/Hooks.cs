@@ -62,7 +62,7 @@ namespace SpecFlow
         public void Initialize()
         {
             scenario = featureName.CreateNode<Scenario>(ScenarioContext.Current.ScenarioInfo.Title);
-            SelectBrowser(BrowserType.Chrome);
+            SelectBrowser(BrowserType.Firefox);
             NavigateToURL(new Uri(ConfigurationManager.AppSettings["URL"].ToString()));
         }
 
