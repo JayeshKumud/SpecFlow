@@ -16,16 +16,20 @@ namespace SpecFlowPrep.Pages
 
         public UserHomePage(RemoteWebDriver driver) : base(driver) => this.driver = driver;
 
+        /// <summary>
+        /// page element
+        /// </summary>
         private By divLoginUser = By.CssSelector("._2cyQi_");
         private By txtSearch = By.CssSelector(".LM6RPg");
         private By btnSearch = By.CssSelector(".vh79eN");
 
-        public IWebElement DivLoginUser() => ElementToBeClickable(divLoginUser);
+         public IWebElement DivLoginUser() => ElementVisible(divLoginUser);
 
+        public IWebElement BtnSearch() => ElementVisible(btnSearch);
         public void SearchProduct(string product)
         {
             EnterText(txtSearch);
-            ElementToBeClickable(btnSearch).Click();
+            ElementVisible(btnSearch).Click();
         }
     }
 }

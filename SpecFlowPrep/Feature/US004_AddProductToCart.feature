@@ -1,4 +1,4 @@
-﻿Feature: Sorting
+﻿Feature: US004_Add Product To Cart
 	In order to avoid silly mistakes
 	As a math idiot
 	I want to be told the sum of two numbers

@@ -17,38 +17,37 @@ namespace SpecFlowPrep.Feature
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Search Product")]
-    public partial class SearchProductFeature
+    [TechTalk.SpecRun.FeatureAttribute("US_003 Search Product", Description="\tIn order to go through Products details\r\n\tAs registered User\r\n\tI want to be able" +
+        " to search product", SourceFile="Feature\\US002_SearchProduct.feature", SourceLine=0)]
+    public partial class US_003SearchProductFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "SearchProduct.feature"
+#line 1 "US002_SearchProduct.feature"
 #line hidden
         
-        [NUnit.Framework.OneTimeSetUpAttribute()]
+        [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Search Product", "\tIn order to go through Products details\r\n\tAs registered User\r\n\tI want to be able" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "US_003 Search Product", "\tIn order to go through Products details\r\n\tAs registered User\r\n\tI want to be able" +
                     " to search product", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.OneTimeTearDownAttribute()]
+        [TechTalk.SpecRun.FeatureCleanup()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [TechTalk.SpecRun.ScenarioCleanup()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -57,7 +56,6 @@ namespace SpecFlowPrep.Feature
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
-            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -83,32 +81,42 @@ namespace SpecFlowPrep.Feature
 #line 7
  testRunner.Given("User logged in with below credential:", ((string)(null)), table1, "Given ");
 #line 10
- testRunner.Then("User \'username\' displayes on home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("User \'jayesh.kumud@gmail.com\' displayes on home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search valid product")]
-        [NUnit.Framework.CategoryAttribute("Smoke")]
-        public virtual void SearchValidProduct()
+        public virtual void ProductSearchPagesDisplaysForValidAndInvalidProduct(string product, string message, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search valid product", null, new string[] {
-                        "Smoke"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Product search pages displays for valid and invalid product", null, exampleTags);
 #line 13
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 6
 this.FeatureBackground();
 #line 14
- testRunner.Given("User search for \'<product>\' on home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("User enter \'{0}\' on home page", product), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 15
- testRunner.And("List of valid \'<product>\' displays on home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I select \'Search\' button on home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 16
- testRunner.When("I see flight records display", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then(string.Format("Product search page displays for \'{0}\'", product), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 17
- testRunner.Then("all the records display have \'<Class>\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And(string.Format("\'{0}\' displays on product search page", product), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Product search pages displays for valid and invalid product, ", SourceLine=19)]
+        public virtual void ProductSearchPagesDisplaysForValidAndInvalidProduct_()
+        {
+#line 13
+this.ProductSearchPagesDisplaysForValidAndInvalidProduct("", "", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.TestRunCleanup()]
+        public virtual void TestRunCleanup()
+        {
+            TechTalk.SpecFlow.TestRunnerManager.GetTestRunner().OnTestRunEnd();
         }
     }
 }

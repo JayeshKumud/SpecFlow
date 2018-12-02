@@ -21,8 +21,6 @@ namespace SpecFlowPrep
     {
         public readonly IObjectContainer objectContainer;
         public RemoteWebDriver driver;
-
-        // extent report var
         private static ExtentReports extent;
         private static ExtentTest feature;
         private static ExtentTest scenario;
@@ -36,7 +34,7 @@ namespace SpecFlowPrep
         public static void BeforeTestRun()
         {
             // extent report and html report initilize
-            var htmlReporter = new ExtentHtmlReporter(Directory.GetCurrentDirectory() + @"\Reports\ExtentReport.html");
+            var htmlReporter = new ExtentHtmlReporter(Directory.GetParent(Directory.GetCurrentDirectory()) + @"\Reports\ExtentReport.html");
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
         }
@@ -44,7 +42,6 @@ namespace SpecFlowPrep
         [AfterTestRun]
         public static void AfterTestRun()
         {
-            // extent report fluh
             extent.Flush();
         }
 

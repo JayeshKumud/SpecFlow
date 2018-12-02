@@ -27,12 +27,11 @@ namespace SpecFlowPrep.Steps
             loginPage.TxtUserName().SendKeys(data.username);
 
             loginPage.TxtPassword().Clear();
-            loginPage.TxtPassword().SendKeys(data.username);
+            loginPage.TxtPassword().SendKeys(data.password.ToString());
         }
 
-
-        [When(@"User selects '(.*)' button on login page")]
-        public void WhenUserSelectsButtonOnLoginPage(string button)
+        [When(@"User select '(.*)' button on login page")]
+        public void WhenUserSelectButtonOnLoginPage(string button)
         {
             if (button.Equals("Login")) { loginPage.BtnLogin().Click(); };
         }
@@ -40,7 +39,7 @@ namespace SpecFlowPrep.Steps
         [Then(@"User '(.*)' displayes on home page")]
         public void ThenUserDisplayesOnHomePage(string user)
         {
-            Assert.IsTrue(user.Contains(homePage.DivLoginUser().Text));
+            Assert.IsTrue(user.Contains(homePage.DivLoginUser().Text.ToLower()));
         }
 
         [Given(@"User logged in with below credential:")]

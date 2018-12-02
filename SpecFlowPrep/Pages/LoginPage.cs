@@ -22,15 +22,15 @@ namespace SpecFlowPrep.Pages
         private By txtPassword = By.XPath("//input[contains(@type,'password')]");
         private By btnLogin = By.XPath("//button[contains(@class,'_2AkmmA')][@type='submit']");
 
-        public IWebElement TxtUserName() => ElementToBeClickable(txtUserName);
-        public IWebElement TxtPassword() => ElementToBeClickable(txtPassword);
-        public IWebElement BtnLogin() => ElementToBeClickable(btnLogin);
+        public IWebElement TxtUserName() => ElementVisible(txtUserName);
+        public IWebElement TxtPassword() => ElementVisible(txtPassword);
+        public IWebElement BtnLogin() => ElementVisible(btnLogin);
 
         public void Login(string username, string password)
         {
             EnterText(txtUserName);
             EnterText(txtPassword);
-            ElementToBeClickable(btnLogin).Click();
+            ElementVisible(btnLogin).Click();
         }
 
     }

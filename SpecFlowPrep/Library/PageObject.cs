@@ -22,13 +22,17 @@ namespace SpecFlowPrep.Library
             this.wait = new WebDriverWait(driver, DRIVER_WAIT_TIME);
         }
 
+        public bool CheckPageTitle(string value)
+        {
+            return wait.Until(d => d.Title.Contains(value));
+        }
 
         public IWebElement ElementExist(By by)
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(by));
         }
 
-        public IWebElement ElementToBeClickable(By by)
+        public IWebElement GetElement(By by)
         {
             return wait.Until(d => d.FindElement(by));
         }
@@ -43,7 +47,7 @@ namespace SpecFlowPrep.Library
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
         }
 
-        public  IWebElement  ElementIsVisible(By by)
+        public  IWebElement  ElementVisible(By by)
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(by));
         }
@@ -55,8 +59,8 @@ namespace SpecFlowPrep.Library
 
         public void EnterText(By by)
         {
-            ElementToBeClickable(by).Clear();
-            ElementToBeClickable(by).Click();
+            ElementVisible(by).Clear();
+            ElementVisible(by).Click();
         }
     }
 }
