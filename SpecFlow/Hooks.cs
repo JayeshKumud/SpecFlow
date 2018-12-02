@@ -35,7 +35,7 @@ namespace SpecFlow
         }
 
         [BeforeTestRun]
-        public static void InitilizeReport()
+        public static void BeforeTestRun()
         {
             //Initialize Extent report before test starts
             var htmlReporter = new ExtentHtmlReporter(Directory.GetCurrentDirectory() + @"\Reports\ExtentReport.html");
@@ -46,7 +46,7 @@ namespace SpecFlow
         }
 
         [AfterTestRun]
-        public static void TearDownReport()
+        public static void AfterTestRun()
         {
             //Flush report once test completes
             extent.Flush();
@@ -67,7 +67,7 @@ namespace SpecFlow
         }
 
         [AfterStep]
-        public void InsertReportingSteps()
+        public void AfterStep()
         {
 
             var stepType = ScenarioStepContext.Current.StepInfo.StepDefinitionType.ToString();
@@ -112,7 +112,7 @@ namespace SpecFlow
         }
 
         [AfterScenario]
-        public void CleanUp()
+        public void AfterScenario()
         {
             driver.Quit();
         }
