@@ -24,7 +24,7 @@ namespace SpecFlowPrep.Library
 
         public bool CheckPageTitle(string value)
         {
-            return wait.Until(d => d.Title.Contains(value));
+            return wait.Until(d => d.Title.ToLower().Contains(value.ToLower()));
         }
 
         public IWebElement ElementExist(By by)
@@ -57,10 +57,15 @@ namespace SpecFlowPrep.Library
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(by));
         }
 
-        public void EnterText(By by)
+        public ReadOnlyCollection<IWebElement> VisibilityOfAllElementsLocatedBy(By by)
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.VisibilityOfAllElementsLocatedBy(by));
+        }
+
+        public void EnterText(By by, string value)
         {
             ElementVisible(by).Clear();
-            ElementVisible(by).Click();
+            ElementVisible(by).SendKeys(value);
         }
     }
 }

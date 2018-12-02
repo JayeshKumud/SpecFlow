@@ -23,5 +23,11 @@ namespace SpecFlowPrep.Steps
             if (button.Equals("Search")) { userHomePage.BtnSearch().Click(); }
         }
 
+        [Given(@"User search for '(.*)' on home page")]
+        public void GivenUserSearchForOnHomePage(string product)
+        {
+            userHomePage.SearchProduct(product);
+            userHomePage.BtnSearch().Click();
+        }
     }
 }

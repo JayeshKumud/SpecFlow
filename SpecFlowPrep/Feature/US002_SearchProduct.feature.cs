@@ -17,9 +17,9 @@ namespace SpecFlowPrep.Feature
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("US_003 Search Product", Description="\tIn order to go through Products details\r\n\tAs registered User\r\n\tI want to be able" +
+    [TechTalk.SpecRun.FeatureAttribute("US002 Search Product", Description="\tIn order to go through Products details\r\n\tAs registered User\r\n\tI want to be able" +
         " to search product", SourceFile="Feature\\US002_SearchProduct.feature", SourceLine=0)]
-    public partial class US_003SearchProductFeature
+    public partial class US003SearchProductFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,7 +31,7 @@ namespace SpecFlowPrep.Feature
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "US_003 Search Product", "\tIn order to go through Products details\r\n\tAs registered User\r\n\tI want to be able" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "US003 Search Product", "\tIn order to go through Products details\r\n\tAs registered User\r\n\tI want to be able" +
                     " to search product", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -85,9 +85,9 @@ namespace SpecFlowPrep.Feature
 #line hidden
         }
         
-        public virtual void ProductSearchPagesDisplaysForValidAndInvalidProduct(string product, string message, string[] exampleTags)
+        public virtual void US002_AC01ProductSearchPagesDisplaysForValidAndInvalidProduct(string product, string message, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Product search pages displays for valid and invalid product", null, exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("US002_AC01 : Product search pages displays for valid and invalid product", null, exampleTags);
 #line 13
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -100,16 +100,25 @@ this.FeatureBackground();
 #line 16
  testRunner.Then(string.Format("Product search page displays for \'{0}\'", product), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 17
- testRunner.And(string.Format("\'{0}\' displays on product search page", product), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("\'{0}\' displays on product search page", message), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Product search pages displays for valid and invalid product, ", SourceLine=19)]
-        public virtual void ProductSearchPagesDisplaysForValidAndInvalidProduct_()
+        [TechTalk.SpecRun.ScenarioAttribute("US002_AC01 : Product search pages displays for valid and invalid product, mobile", SourceLine=19)]
+        public virtual void US002_AC01ProductSearchPagesDisplaysForValidAndInvalidProduct_Mobile()
         {
 #line 13
-this.ProductSearchPagesDisplaysForValidAndInvalidProduct("", "", ((string[])(null)));
+this.US002_AC01ProductSearchPagesDisplaysForValidAndInvalidProduct("mobile", "mobile", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("US002_AC01 : Product search pages displays for valid and invalid product, aaaaaaa" +
+            "aaaaaaaaaaaaaaa", SourceLine=19)]
+        public virtual void US002_AC01ProductSearchPagesDisplaysForValidAndInvalidProduct_Aaaaaaaaaaaaaaaaaaaaaa()
+        {
+#line 13
+this.US002_AC01ProductSearchPagesDisplaysForValidAndInvalidProduct("aaaaaaaaaaaaaaaaaaaaaa", "Sorry, no results found!", ((string[])(null)));
 #line hidden
         }
         

@@ -39,14 +39,14 @@ namespace SpecFlowPrep.Steps
         [Then(@"User '(.*)' displayes on home page")]
         public void ThenUserDisplayesOnHomePage(string user)
         {
-            Assert.IsTrue(user.Contains(homePage.DivLoginUser().Text.ToLower()));
+            Assert.IsTrue(user.Contains(homePage.DivLoginUser().Text.ToLower().ToString()));
         }
 
         [Given(@"User logged in with below credential:")]
         public void GivenUserLoggedInWithBelowCredential(Table table)
         {
             dynamic data = table.CreateDynamicInstance();
-            loginPage.Login(data.username, data.password);
+            loginPage.Login(data.username.ToString(), data.password.ToString());
         }
 
     }

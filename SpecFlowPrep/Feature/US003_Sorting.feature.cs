@@ -17,8 +17,8 @@ namespace SpecFlowPrep.Feature
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("US_002 Sorting", Description="\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
-        "f two numbers", SourceFile="Feature\\US003_Sorting.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("US_002 Sorting", Description="\tIn order to search better\r\n\tAs registered user\r\n\tI want to be able to sort produ" +
+        "ct list ", SourceFile="Feature\\US003_Sorting.feature", SourceLine=0)]
     public partial class US_002SortingFeature
     {
         
@@ -31,8 +31,8 @@ namespace SpecFlowPrep.Feature
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "US_002 Sorting", "\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
-                    "f two numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "US_002 Sorting", "\tIn order to search better\r\n\tAs registered user\r\n\tI want to be able to sort produ" +
+                    "ct list ", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -68,25 +68,49 @@ namespace SpecFlowPrep.Feature
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Add two numbers", new string[] {
-                "mytag"}, SourceLine=6)]
-        public virtual void AddTwoNumbers()
+        public virtual void FeatureBackground()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", null, new string[] {
-                        "mytag"});
+#line 6
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "username",
+                        "password"});
+            table1.AddRow(new string[] {
+                        "jayesh.kumud@gmail.com",
+                        "9320419345"});
 #line 7
+ testRunner.Given("User logged in with below credential:", ((string)(null)), table1, "Given ");
+#line 10
+ testRunner.Then("User \'jayesh.kumud@gmail.com\' displayes on home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+        }
+        
+        public virtual void US003_AC01SortTheAvailableProductsViaPrice(string product, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("US003_AC01 : Sort the available products via price", null, exampleTags);
+#line 12
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 8
- testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 9
- testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 10
+#line 6
+this.FeatureBackground();
+#line 13
+ testRunner.Given(string.Format("User search for \'{0}\' on home page", product), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 14
+ testRunner.And(string.Format("\'{0}\' displayes on product search page", product), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 15
  testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 11
+#line 16
  testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("US003_AC01 : Sort the available products via price, mobile", SourceLine=18)]
+        public virtual void US003_AC01SortTheAvailableProductsViaPrice_Mobile()
+        {
+#line 12
+this.US003_AC01SortTheAvailableProductsViaPrice("mobile", ((string[])(null)));
+#line hidden
         }
         
         [TechTalk.SpecRun.TestRunCleanup()]

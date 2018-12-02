@@ -22,13 +22,15 @@ namespace SpecFlowPrep.Pages
         private By divLoginUser = By.CssSelector("._2cyQi_");
         private By txtSearch = By.CssSelector(".LM6RPg");
         private By btnSearch = By.CssSelector(".vh79eN");
+        private By btnLogout = By.XPath("//div[contains(@class,'_2k0gmP')][contains(text(),'Logout')]");
 
-         public IWebElement DivLoginUser() => ElementVisible(divLoginUser);
-
+        public IWebElement DivLoginUser() => ElementVisible(divLoginUser);
+        public IWebElement BtnLogout() => ElementVisible(btnLogout);
         public IWebElement BtnSearch() => ElementVisible(btnSearch);
+
         public void SearchProduct(string product)
         {
-            EnterText(txtSearch);
+            EnterText(txtSearch, product);
             ElementVisible(btnSearch).Click();
         }
     }

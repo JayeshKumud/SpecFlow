@@ -4,6 +4,7 @@ using AventStack.ExtentReports.Reporter;
 using BoDi;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
+using SpecFlowPrep.Pages;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -64,13 +66,53 @@ namespace SpecFlowPrep
         [AfterScenario]
         public void AfterScenario()
         {
+            new UserHomePage(driver).DivLoginUser().Click();
+            Thread.Sleep(1 * 1000);
+            new UserHomePage(driver).BtnLogout().Click();
             driver.Quit();
         }
 
         [AfterStep]
         public void AfterStep()
         {
+            var stepType = ScenarioStepContext.Current.StepInfo.StepDefinitionType.ToString();
 
+            PropertyInfo pInfo = typeof(ScenarioContext).GetProperty("ScenarioExecutionStatus", BindingFlags.Instance | BindingFlags.Public);
+            MethodInfo getter = pInfo.GetGetMethod(nonPublic: true);
+            object TestResult = getter.Invoke(ScenarioContext.Current, null);
+
+            if (ScenarioContext.Current.TestError == null)
+            {
+                if (stepType == "Given")
+                    scenario.CreateNode<Given>(ScenarioStepContext.Current.StepInfo.Text);
+                else if (stepType == "When")
+                    scenario.CreateNode<When>(ScenarioStepContext.Current.StepInfo.Text);
+                else if (stepType == "Then")
+                    scenario.CreateNode<Then>(ScenarioStepContext.Current.StepInfo.Text);
+                else if (stepType == "And")
+                    scenario.CreateNode<And>(ScenarioStepContext.Current.StepInfo.Text);
+            }
+            else if (ScenarioContext.Current.TestError != null)
+            {
+                if (stepType == "Given")
+                    scenario.CreateNode<Given>(ScenarioStepContext.Current.StepInfo.Text).Fail(ScenarioContext.Current.TestError.InnerException);
+                else if (stepType == "When")
+                    scenario.CreateNode<When>(ScenarioStepContext.Current.StepInfo.Text).Fail(ScenarioContext.Current.TestError.InnerException);
+                else if (stepType == "Then")
+                    scenario.CreateNode<Then>(ScenarioStepContext.Current.StepInfo.Text).Fail(ScenarioContext.Current.TestError.Message);
+            }
+
+            //Pending Status
+            if (TestResult.ToString() == "StepDefinitionPending")
+            {
+                if (stepType == "Given")
+                    scenario.CreateNode<Given>(ScenarioStepContext.Current.StepInfo.Text).Skip("Step Definition Pending");
+                else if (stepType == "When")
+                    scenario.CreateNode<When>(ScenarioStepContext.Current.StepInfo.Text).Skip("Step Definition Pending");
+                else if (stepType == "Then")
+                    scenario.CreateNode<Then>(ScenarioStepContext.Current.StepInfo.Text).Skip("Step Definition Pending");
+
+            }
         }
 
         private void NavigateToURL(Uri uri)

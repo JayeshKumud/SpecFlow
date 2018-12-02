@@ -28,8 +28,8 @@ namespace SpecFlowPrep.Pages
 
         public void Login(string username, string password)
         {
-            EnterText(txtUserName);
-            EnterText(txtPassword);
+            EnterText(txtUserName, username);
+            EnterText(txtPassword, password);
             ElementVisible(btnLogin).Click();
         }
 
