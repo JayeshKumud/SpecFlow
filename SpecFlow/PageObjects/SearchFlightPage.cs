@@ -42,71 +42,71 @@ namespace SpecFlow.PageObjects
 
         public void EnterFrom(String value)
         {
-            elementToBeClickable(fromText).SendKeys(value);
+            ElementToBeClickable(fromText).SendKeys(value);
             //UITag().FindElement(By.XPath("//li/div/div[contains(@class,'textOverflow')]/div[contains(@class,'mainTxt clearfix')]/span[contains(text(),'" + value + "')]")).Click();
             //UITag().FindElement(By.XPath("//span[contains(text(),'" + value + "')]")).Click();
-            elementToBeClickable(By.XPath("//span[contains(text(),'" + value + "')]")).Click();
+            ElementToBeClickable(By.XPath("//span[contains(text(),'" + value + "')]")).Click();
         }
 
         public void EnterTo(String value)
         {
-            elementToBeClickable(toText).SendKeys(value);
+            ElementToBeClickable(toText).SendKeys(value);
             //UITag().FindElement(By.XPath("//li/div/div[contains(@class,'textOverflow')]/div[contains(@class,'mainTxt clearfix')]/span[contains(text(),'" + value + "')]")).Click();
             UITag().FindElement(By.XPath("//span[contains(text(),'" + value + "')]")).Click();
             //elementToBeClickable(By.XPath("//span[contains(text(),'" + value + "')]")).Click();
         }
 
-        public IWebElement UITag() => elementToBeClickable(uiTag); 
+        public IWebElement UITag() => ElementToBeClickable(uiTag); 
 
-        public IWebElement ToText() => elementToBeClickable(toText); 
+        public IWebElement ToText() => ElementToBeClickable(toText); 
 
-        public void SelectRoundTrip() => elementToBeClickable(roundTrip).Click(); 
+        public void SelectRoundTrip() => ElementToBeClickable(roundTrip).Click(); 
 
-        public void SelectOneWayTrip() => elementToBeClickable(oneWayTrip).Click(); 
+        public void SelectOneWayTrip() => ElementToBeClickable(oneWayTrip).Click(); 
 
-        public void SelectMultiCityTrip() => elementToBeClickable(multiCityTrip).Click(); 
+        public void SelectMultiCityTrip() => ElementToBeClickable(multiCityTrip).Click(); 
 
-        public void ClickSearchButton() => elementToBeClickable(searchButton).Click(); 
+        public void ClickSearchButton() => ElementToBeClickable(searchButton).Click(); 
 
         public void SelectFromDate(int dateOffSet)
         {
             string date = DateTime.Now.AddDays(dateOffSet).ToString("yyyyMMdd");
-            elementToBeClickable(departDiv).FindElement(By.XPath("//i[contains(@class,'calendar1')]")).Click();
-            elementToBeClickable(By.CssSelector("#fare_" + date)).Click();
+            ElementToBeClickable(departDiv).FindElement(By.XPath("//i[contains(@class,'calendar1')]")).Click();
+            ElementToBeClickable(By.CssSelector("#fare_" + date)).Click();
         }
 
         public void SelectToDate(int dateOffSet)
         {
             string date = DateTime.Now.AddDays(dateOffSet).ToString("yyyyMMdd");
-            elementToBeClickable(returnDiv).FindElement(By.XPath("//i[contains(@class,'calendar1')]")).Click();
-            elementToBeClickable(By.CssSelector("#fare_" + date)).Click();
+            ElementToBeClickable(returnDiv).FindElement(By.XPath("//i[contains(@class,'calendar1')]")).Click();
+            ElementToBeClickable(By.CssSelector("#fare_" + date)).Click();
         }
 
         public void SelectPassenger(int adult, int child, int infant)
         {
-            elementToBeClickable(selectTraveler).Click();
+            ElementToBeClickable(selectTraveler).Click();
 
             for (int i = 1; i < adult; i++)
             {
-                elementToBeClickable(adultPlus).Click();
+                ElementToBeClickable(adultPlus).Click();
             }
 
             for (int i = 0; i < child; i++)
             {
-                elementToBeClickable(ChildPlus).Click();
+                ElementToBeClickable(ChildPlus).Click();
             }
 
             for (int i = 0; i < infant; i++)
             {
-                elementToBeClickable(InfantPlus).Click();
+                ElementToBeClickable(InfantPlus).Click();
             }
 
-            elementToBeClickable(ClosePax).Click();
+            ElementToBeClickable(ClosePax).Click();
         }
 
         public void SelectClass(String classToBeSelected)
         {
-            new SelectElement(elementToBeClickable(selectClass)).SelectByText(classToBeSelected);
+            new SelectElement(ElementToBeClickable(selectClass)).SelectByText(classToBeSelected);
         }
     }
 }

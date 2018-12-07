@@ -22,7 +22,7 @@ namespace SpecFlow.Steps
         [Then(@"I see Flight Search Page")]
         public void ThenISeeFlightSearchPage()
         {
-            Assert.IsTrue(searchFlightPage.checkPageTitleContains("Flight"), "correct page displayed.");
+            Assert.IsTrue(searchFlightPage.CheckPageTitleContains("Flight"), "correct page displayed.");
         }
 
         [Given(@"I entered the followings data as Flight Search Criteria")]
@@ -30,17 +30,18 @@ namespace SpecFlow.Steps
         {
             dynamic data = table.CreateDynamicInstance();
 
-            searchFlightPage.EnterFrom(data.From);
-            Thread.Sleep(2 * 1000);
-            searchFlightPage.EnterTo(data.To);
-            Thread.Sleep(2 * 1000);
             searchFlightPage.SelectFromDate(data.FromOffSet);
             Thread.Sleep(2 * 1000);
-            //searchFlightPage.SelectToDate(flightSearch.ToOffSet);
+            searchFlightPage.SelectToDate(data.ToOffSet);
 
             searchFlightPage.SelectPassenger(data.Adult, data.Child, data.Infant);
             Thread.Sleep(2 * 1000);
             searchFlightPage.SelectClass(data.Class);
+            Thread.Sleep(2 * 1000);
+
+            searchFlightPage.EnterFrom(data.From);
+            Thread.Sleep(2 * 1000);
+            searchFlightPage.EnterTo(data.To);
             Thread.Sleep(2 * 1000);
         }
 

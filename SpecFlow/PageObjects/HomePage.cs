@@ -17,10 +17,10 @@ namespace SpecFlow.PageObjects
         private By signIn = By.CssSelector("#get_sign_in");
         private By flight = By.XPath("//span[contains(@class,'iconText')][contains(text(),'Flights')]");
         
-        public String GetSignInTitleOption() => waitForExpectedElement(signIn).Text; 
+        public String GetSignInTitleOption() => WaitForExpectedElement(signIn).Text; 
 
-        public void ClickFlightLink() => elementToBeClickable(flight).Click();
+        public void ClickFlightLink() => ElementToBeClickable(flight).Click();
 
-        public void ClickSignInLink() => elementToBeClickable(signIn).Click();
+        public void ClickSignInLink() => ElementToBeClickable(signIn).Click();
     }
 }

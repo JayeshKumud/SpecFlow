@@ -27,7 +27,7 @@ namespace SpecFlow.Library
         /**
          * Returns the current page title from page
          */
-        public String getCurrentPageTitle()
+        public String GetCurrentPageTitle()
         {
             return driver.Title;
         }
@@ -38,7 +38,7 @@ namespace SpecFlow.Library
          * @param title the expected title, which must be an exact match
          * @return true when the title matches, false otherwise
          */
-        public bool checkPageTitle(String title)
+        public bool CheckPageTitle(String title)
         {
             //return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(ExpectedConditions.TitleIs(title));
             return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(d => d.Title.Equals(title));
@@ -51,7 +51,7 @@ namespace SpecFlow.Library
          * @param title the fragment of title expected
          * @return true when the title matches, false otherwise
          */
-        public bool checkPageTitleContains(String title)
+        public bool CheckPageTitleContains(String title)
         {
             //return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(ExpectedConditions.TitleContains(title));
             return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(d => d.Title.Contains(title));
@@ -63,7 +63,7 @@ namespace SpecFlow.Library
          * @param url the url that the page should be on
          * @return <code>true</code> when the URL is what it should be
          */
-        public bool checkPageUrlToBe(String url)
+        public bool CheckPageUrlToBe(String url)
         {
             //return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(ExpectedConditions.UrlToBe(url));
             return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(d => d.Url.Equals(url));
@@ -75,7 +75,7 @@ namespace SpecFlow.Library
          * @param fraction the fraction of the url that the page should be on
          * @return <code>true</code> when the URL contains the text
          */
-        public bool checkPageUrlContains(String fraction)
+        public bool CheckPageUrlContains(String fraction)
         {
             //return new WebDriverWait(getWebDriver(), DRIVER_WAIT_TIME).Until(ExpectedConditions.UrlContains(fraction));
             return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(d => d.Url.Contains(fraction));
@@ -86,7 +86,7 @@ namespace SpecFlow.Library
          *
          * @param by Element location found by css, xpath, id etc...
          **/
-        protected IWebElement waitForExpectedElement(By by)
+        protected IWebElement WaitForExpectedElement(By by)
         {
             //return wait.Until(ExpectedConditions.ElementExists(by));
             return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(d => d.FindElement(by));
@@ -99,12 +99,12 @@ namespace SpecFlow.Library
          * @param waitTimeInSeconds max time to wait Until element is visible
          **/
 
-        public IWebElement waitForExpectedElement(By by, long waitTimeInSeconds)
+        public IWebElement WaitForExpectedElement(By by, long waitTimeInSeconds)
         {
             try
             {
                 //return new WebDriverWait(getWebDriver(), TimeSpan.FromSeconds(waitTimeInSeconds)).Until(d => d.FindElement(by));
-                return new WebDriverWait(driver, TimeSpan.FromSeconds(waitTimeInSeconds)).Until(visibilityOfElementLocated(by));
+                return new WebDriverWait(driver, TimeSpan.FromSeconds(waitTimeInSeconds)).Until(VisibilityOfElementLocated(by));
             }
             catch (NoSuchElementException e)
             {
@@ -116,7 +116,7 @@ namespace SpecFlow.Library
             }
         }
 
-        private Func<IWebDriver, IWebElement> visibilityOfElementLocated(By by)
+        private Func<IWebDriver, IWebElement> VisibilityOfElementLocated(By by)
         {
             return driver =>
             {
@@ -125,14 +125,14 @@ namespace SpecFlow.Library
             };
         }
 
-        /**
-         * An expectation for checking if the given text is present in the specified element.
-         *
-         * @param element the WebElement
-         * @param text    to be present in the element
-         * @return true once the element contains the given text
-         */
-        public bool textToBePresentInElement(IWebElement element, String text)
+        //*
+        // * An expectation for checking if the given text is present in the specified element.
+        // *
+        // * @param element the WebElement
+        // * @param text to be present in the element
+        // * @return true once the element contains the given text
+
+        public bool TextToBePresentInElement(IWebElement element, String text)
         {
             //return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(ExpectedConditions.TextToBePresentInElement(element, text));
             return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElement(element, text));
@@ -147,7 +147,7 @@ namespace SpecFlow.Library
          * @param text to be present in the element found by the locator
          * @return true once the first element located by locator contains the given text
          */
-        public bool textToBePresentInElementLocated(By by, String text)
+        public bool TextToBePresentInElementLocated(By by, String text)
         {
             return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementLocated(by, text));
         }
@@ -161,7 +161,7 @@ namespace SpecFlow.Library
          * @param text    to be present in the element's value attribute
          * @return true once the element's value attribute contains the given text
          */
-        public bool textToBePresentInElementValue(IWebElement element, String text)
+        public bool TextToBePresentInElementValue(IWebElement element, String text)
         {
             return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementValue(element, text));
         }
@@ -176,7 +176,7 @@ namespace SpecFlow.Library
          * @return true once the value attribute of the first element located by locator contains
          * the given text
          */
-        public bool textToBePresentInElementValue(By by, String text)
+        public bool TextToBePresentInElementValue(By by, String text)
         {
             return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementValue(by, text));
         }
@@ -189,7 +189,7 @@ namespace SpecFlow.Library
          *
          * @param frameLocator used to find the frame (id or name)
          */
-        public IWebDriver frameToBeAvailableAndSwitchToIt(String frameLocator)
+        public IWebDriver FrameToBeAvailableAndSwitchToIt(String frameLocator)
         {
             return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.FrameToBeAvailableAndSwitchToIt(frameLocator));
         }
@@ -202,7 +202,7 @@ namespace SpecFlow.Library
          *
          * @param by used to find the frame
          */
-        public IWebDriver frameToBeAvailableAndSwitchToIt(By by)
+        public IWebDriver FrameToBeAvailableAndSwitchToIt(By by)
         {
             return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.FrameToBeAvailableAndSwitchToIt(by));
         }
@@ -214,7 +214,7 @@ namespace SpecFlow.Library
          *
          * @param by used to find the element
          */
-        public bool invisibilityOfElementLocated(By by)
+        public bool InvisibilityOfElementLocated(By by)
         {
             return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(by));
         }
@@ -226,7 +226,7 @@ namespace SpecFlow.Library
          * @param by   used to find the element
          * @param text of the element
          */
-        public bool invisibilityOfElementWithText(By by, String text)
+        public bool InvisibilityOfElementWithText(By by, String text)
         {
             return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementWithText(by, text));
         }
@@ -239,7 +239,7 @@ namespace SpecFlow.Library
          * @param by used to find the element
          * @return the WebElement once it is located and clickable (visible and enabled)
          */
-        public IWebElement elementToBeClickable(By by)
+        public IWebElement ElementToBeClickable(By by)
         {
             return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
         }
@@ -253,7 +253,7 @@ namespace SpecFlow.Library
          * @return the (same) WebElement once it is clickable (visible and enabled)
          */
 
-        public IWebElement elementToBeClickable(IWebElement element)
+        public IWebElement ElementToBeClickable(IWebElement element)
         {
             return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
         }
@@ -266,7 +266,7 @@ namespace SpecFlow.Library
          * @return false is the element is still attached to the DOM, true
          * otherwise.
          */
-        public bool stalenessOf(IWebElement element)
+        public bool StalenessOf(IWebElement element)
         {
             return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.StalenessOf(element));
         }
@@ -274,7 +274,7 @@ namespace SpecFlow.Library
         /**
          * An expectation for checking if the given element is selected.
          */
-        public bool elementToBeSelected(By by)
+        public bool ElementToBeSelected(By by)
         {
             return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeSelected(by));
         }
@@ -282,7 +282,7 @@ namespace SpecFlow.Library
         /**
          * An expectation for checking if the given element is selected.
          */
-        public bool elementToBeSelected(IWebElement element)
+        public bool ElementToBeSelected(IWebElement element)
         {
             return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeSelected(element));
         }
@@ -290,7 +290,7 @@ namespace SpecFlow.Library
         /**
          * An expectation for checking if the given element is selected.
          */
-        public bool elementSelectionStateToBe(IWebElement element, bool selected)
+        public bool ElementSelectionStateToBe(IWebElement element, bool selected)
         {
             return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementSelectionStateToBe(element, selected));
         }
@@ -298,12 +298,12 @@ namespace SpecFlow.Library
         /**
          * An expectation for checking if the given element is selected.
          */
-        public bool elementSelectionStateToBe(By by, bool selected)
+        public bool ElementSelectionStateToBe(By by, bool selected)
         {
             return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementSelectionStateToBe(by, selected));
         }
 
-        public void waitForAlert()
+        public void WaitForAlert()
         {
             (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
         }
@@ -316,7 +316,7 @@ namespace SpecFlow.Library
          * @param by used to find the element
          * @return the list of WebElements once they are located
          */
-        public ReadOnlyCollection<IWebElement> visibilityOfAllElementsLocatedBy(By by)
+        public ReadOnlyCollection<IWebElement> VisibilityOfAllElementsLocatedBy(By by)
         {
             return new WebDriverWait(driver, DRIVER_WAIT_TIME).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.VisibilityOfAllElementsLocatedBy(by));
         }
@@ -330,7 +330,7 @@ namespace SpecFlow.Library
          * @param elements list of WebElements
          * @return the list of WebElements once they are located
          */
-        public ReadOnlyCollection<IWebElement> visibilityOfAllElements(ReadOnlyCollection<IWebElement> elements)
+        public ReadOnlyCollection<IWebElement> VisibilityOfAllElements(ReadOnlyCollection<IWebElement> elements)
         {
             return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.VisibilityOfAllElementsLocatedBy(elements));
         }
@@ -343,7 +343,7 @@ namespace SpecFlow.Library
          * @param by used to find the element
          * @return the list of WebElements once they are located
          */
-        public ReadOnlyCollection<IWebElement> presenceOfAllElementsLocatedBy(By by)
+        public ReadOnlyCollection<IWebElement> PresenceOfAllElementsLocatedBy(By by)
         {
             return (new WebDriverWait(driver, DRIVER_WAIT_TIME)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(by));
         }
@@ -355,7 +355,7 @@ namespace SpecFlow.Library
          * @param by used to find the element
          * @return the WebElement once it is located
          */
-        public bool isElementPresent(By by)
+        public bool IsElementPresent(By by)
         {
             try
             {
@@ -368,12 +368,12 @@ namespace SpecFlow.Library
             return true;
         }
 
-        public void navigateToPreviousPageUsingBrowserBackButton()
+        public void NavigateToPreviousPageUsingBrowserBackButton()
         {
             driver.Navigate().Back();
         }
 
-        public void clickWithinElementWithXYCoordinates(IWebElement webElement, int x, int y)
+        public void ClickWithinElementWithXYCoordinates(IWebElement webElement, int x, int y)
         {
             Actions builder = new Actions(driver);
             builder.MoveToElement(webElement, x, y);
@@ -381,12 +381,12 @@ namespace SpecFlow.Library
             builder.Perform();
         }
 
-        public String getElementByTagNameWithJSExecutor(String tagName)
+        public String GetElementByTagNameWithJSExecutor(String tagName)
         {
             return ((IJavaScriptExecutor)driver).ExecuteScript("return window.getComputedStyle(document.getElementsByTagName('" + tagName + "')").ToString();
         }
 
-        public String getElementByQueryJSExecutor(String cssSelector)
+        public string GetElementByQueryJSExecutor(String cssSelector)
         {
             return ((IJavaScriptExecutor)driver).ExecuteScript("return window.getComputedStyle(document.querySelector('" + cssSelector + "')").ToString();
         }
@@ -402,7 +402,7 @@ namespace SpecFlow.Library
          *
          * @param by Element location found by css, xpath, id etc...
          **/
-        protected IWebElement findElement(By by)
+        protected IWebElement FindElement(By by)
         {
             return driver.FindElement(by);
         }
@@ -414,10 +414,10 @@ namespace SpecFlow.Library
          * @param inputText text to be entered
          **/
 
-        protected void clearEnterText(By by, String inputText)
+        protected void ClearEnterText(By by, String inputText)
         {
-            findElement(by).Clear();
-            findElement(by).SendKeys(inputText);
+            FindElement(by).Clear();
+            FindElement(by).SendKeys(inputText);
         }
 
         /**
@@ -427,10 +427,10 @@ namespace SpecFlow.Library
          *
          * @param inputText text to be entered
          **/
-        protected void waitClearEnterText(By by, String inputText)
+        protected void WaitClearEnterText(By by, String inputText)
         {
-            waitForExpectedElement(by).Clear();
-            findElement(by).SendKeys(inputText);
+            WaitForExpectedElement(by).Clear();
+            FindElement(by).SendKeys(inputText);
 
         }
     }

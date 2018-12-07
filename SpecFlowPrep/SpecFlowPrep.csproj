@@ -27,7 +27,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -152,7 +152,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Default.srprofile" />
     <None Include="Feature\US004_AddProductToCart.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>US004_AddProductToCart.feature.cs</LastGenOutput>
@@ -181,12 +180,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="extent-config.xml" />
-    <Content Include="Resources\chromedriver.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\geckodriver.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\chromedriver.exe" />
+    <Content Include="Resources\geckodriver.exe" />
     <Content Include="Resources\IEDriverServer.exe" />
   </ItemGroup>
   <ItemGroup />

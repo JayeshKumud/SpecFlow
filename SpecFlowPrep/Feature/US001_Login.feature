@@ -1,5 +1,5 @@
 ﻿Feature: US001 Login
-	In explore products
+	In order to explore products
 	As registered user
 	I want to be able to login
 

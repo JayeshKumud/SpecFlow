@@ -125,7 +125,7 @@ namespace SpecFlowPrep
         {
             if(browserType == BrowserType.FireFox)
             {
-                var driverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                var driverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location + @"\Resource\");
                 FirefoxDriverService service = FirefoxDriverService.CreateDefaultService(driverDir, "geckodriver.exe");
                 service.HideCommandPromptWindow = true;
                 service.SuppressInitialDiagnosticInformation = true;

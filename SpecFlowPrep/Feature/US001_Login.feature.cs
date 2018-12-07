@@ -17,7 +17,7 @@ namespace SpecFlowPrep.Feature
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("US001 Login", Description="\tIn explore products\r\n\tAs registered user\r\n\tI want to be able to login", SourceFile="Feature\\US001_Login.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("US001 Login", Description="\tIn order to explore products\r\n\tAs registered user\r\n\tI want to be able to login", SourceFile="Feature\\US001_Login.feature", SourceLine=0)]
     public partial class US001LoginFeature
     {
         
@@ -30,7 +30,7 @@ namespace SpecFlowPrep.Feature
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "US001 Login", "\tIn explore products\r\n\tAs registered user\r\n\tI want to be able to login", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "US001 Login", "\tIn order to explore products\r\n\tAs registered user\r\n\tI want to be able to login", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

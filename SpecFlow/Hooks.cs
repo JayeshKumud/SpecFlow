@@ -59,11 +59,17 @@ namespace SpecFlow
         }
 
         [BeforeScenario]
-        public void Initialize()
+        public void BeforeScenario()
         {
             scenario = featureName.CreateNode<Scenario>(ScenarioContext.Current.ScenarioInfo.Title);
             SelectBrowser(BrowserType.Firefox);
             NavigateToURL(new Uri(ConfigurationManager.AppSettings["URL"].ToString()));
+        }
+
+        [AfterScenario]
+        public void AfterScenario()
+        {
+            driver.Quit();
         }
 
         [AfterStep]
@@ -111,18 +117,12 @@ namespace SpecFlow
 
         }
 
-        [AfterScenario]
-        public void AfterScenario()
-        {
-            driver.Quit();
-        }
-
         internal void SelectBrowser(BrowserType browserType)
         {
             switch (browserType)
             {
                 case BrowserType.Chrome:
-                    var cdriverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    var cdriverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\Resource\";
                     ChromeDriverService cservice = ChromeDriverService.CreateDefaultService(cdriverDir, "chromedriver.exe");
                     cservice.HideCommandPromptWindow = true;
                     cservice.SuppressInitialDiagnosticInformation = true;
@@ -133,7 +133,7 @@ namespace SpecFlow
                     break;
 
                 case BrowserType.Firefox:
-                    var fdriverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    var fdriverDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\Resource\";
                     FirefoxDriverService fservice = FirefoxDriverService.CreateDefaultService(fdriverDir, "geckodriver.exe");
                     //service.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
                     fservice.HideCommandPromptWindow = true;
